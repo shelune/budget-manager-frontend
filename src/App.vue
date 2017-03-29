@@ -30,7 +30,8 @@ export default {
 
 <style lang="scss">
   $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+  @import "./styles/vnd/_variables.scss";
   @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-  @import "./static/styles/vnd/_all.scss";
+  @import "./styles/vnd/_bootswatch.scss";
   @import "./styles/all.scss";
 </style>
