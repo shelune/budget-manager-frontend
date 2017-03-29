@@ -1,7 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <nav class="navbar-default">
+        <div class="container">
+            <a href="#0" class="navbar-brand"><img src="https://placehold.it/300x60" alt="logo"></a>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Register</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <router-view></router-view>
+    </div>
+    <hr>
+    <footer class="text-center">
+        Built with Vue.
+    </footer>
   </div>
 </template>
 
@@ -11,13 +28,9 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+  @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+  @import "./static/styles/vnd/_all.scss";
+  @import "./styles/all.scss";
 </style>

@@ -23,7 +23,7 @@
 <style lang="scss">
   $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-  @import "./../styles/vnd/_all.scss";
+  @import "./static/styles/vnd/_all.scss";
   @import "./../styles/all.scss";
 </style>
 
