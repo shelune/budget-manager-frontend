@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar-default">
         <div class="container">
-            <a href="#0" class="navbar-brand"><img src="https://placehold.it/300x60" alt="logo"></a>
+            <a href="#0" class="navbar-brand">Budget Manager</a>
             <ul class="nav navbar-nav">
                 <li><a href="#">Register</a></li>
             </ul>
