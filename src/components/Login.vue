@@ -37,24 +37,22 @@ export default {
   },
   methods: {
     submit() {
-      const query = qs.stringify({
-        access_token: 'kJ1JTzp94noxqW9AYvbnvRI7ZXeqpn2q',
-        email: this.credentials.email,
-        password: this.credentials.password
+      api.login(this.credentials).then(data => {
+        console.log(data)
       })
 
-      axios({
-        method: 'post',
-        baseURL: 'https://desolate-dawn-70418.herokuapp.com',
-        url: '/users',
+
+      /* THIS WORKS
+      api.send('users', {
         data: {
-          "access_token": "kJ1JTzp94noxqW9AYvbnvRI7ZXeqpn2q",
-          "email": "user97@user.com",
-          "password": "123456"
+          email: this.credentials.email,
+          password: this.credentials.password,
+          access_token: 'kJ1JTzp94noxqW9AYvbnvRI7ZXeqpn2q'
         }
       }).then(data => {
         console.log(data)
       })
+      */
     }
   }
 }

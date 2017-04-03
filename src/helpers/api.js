@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import qs from 'qs'
 import Vue from 'vue'
 import axios from 'axios'
 
@@ -50,21 +51,27 @@ export function send(name, options = {}) {
 
   console.log('url: ', url, 'method:', method, 'data:', options.data)
 
-  return Vue.http[method](url, options.data)
-  .catch(error => {
+  return axios({
+    method: method,
+    url: url,
+    data: options.data
+  }).catch(error => {
     console.log('got error from axios: ', error)
   })
 }
 
 export function login(credentials) {
-  return Vue.http.post(baseUrl + '/auth', {
-    email: 'user2@user.com',
-    password: 'password',
-    access_token: 'kJ1JTzp94noxqW9AYvbnvRI7ZXeqpn2q'
-  }, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+  return axios({
+    url: baseUrl + '/auth',
+    method: 'post',
+    data: {
+      access_token: 'kJ1JTzp94noxqW9AYvbnvRI7ZXeqpn2q',
     },
-    emulateJSON: true
+    auth: {
+      username: credentials.email,
+      password: credentials.password
+    }
+  }).catch(error => {
+    console.log('got error when logging in: ', error)
   })
 }
