@@ -1,0 +1,18 @@
+.side-nav {
+  position: fixed;
+  top: 51px;
+  left: 225px;
+  width: 225px;
+  margin-left: -225px;
+  border: none;
+  border-radius: 0;
+  overflow-y: auto;
+  background-color: $pal-dark;
+  bottom: 0;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+
+  @include respond-to(sm) {
+    background-color: $pal-white;
+  }
+}

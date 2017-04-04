@@ -24,6 +24,8 @@ const endpoints = {
   }
 }
 
+export let authenticated = false
+
 export function send(name, options = {}) {
   if (!_.has(endpoints, name)) {
     throw new Error('route not present')
@@ -49,14 +51,14 @@ export function send(name, options = {}) {
     }
   }
 
-  console.log('url: ', url, 'method:', method, 'data:', options.data)
-
   return axios({
     method: method,
     url: url,
     data: options.data
   }).catch(error => {
     console.log('got error from axios: ', error)
+  }).then(resp => {
+    console.log(resp)
   })
 }
 
@@ -73,5 +75,8 @@ export function login(credentials) {
     }
   }).catch(error => {
     console.log('got error when logging in: ', error)
+  }).then(resp => {
+    authenticated = true
+    localStorage.setItem('tmptoken', resp.data.token)
   })
 }
