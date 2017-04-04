@@ -4,11 +4,12 @@
         <div class="container">
             <a href="#0" class="navbar-brand">Budget Manager</a>
             <ul class="nav navbar-nav">
-                <li><a href="#">Register</a></li>
+                <li><a href="#">Change Password</a></li>
             </ul>
 
             <ul class="nav navbar-nav pull-right">
-                <li><a href="#">Dashboard</a></li>
+                <li><router-link :to="{name: 'dashboard'}" href="#">Dashboard</router-link></li>
+                <li><a href="#" @click.prevent="logout">Log Out</a></li>
             </ul>
         </div>
     </nav>
@@ -23,8 +24,19 @@
 </template>
 
 <script>
+import * as api from '@/helpers/api.js'
+import router from './router'
+
 export default {
-  name: 'app'
+  name: 'app',
+  methods: {
+    logout() {
+      api.logout()
+      router.push({
+        name: 'login'
+      })
+    }
+  }
 }
 </script>
 

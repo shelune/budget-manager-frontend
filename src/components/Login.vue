@@ -11,7 +11,7 @@
         <input id="password" type="password" class="form-control" placeholder="Password" v-model="credentials.password">
       </div>
       <div class="alert alert-danger" v-if="error">
-
+        <p><span>{{ errorMsg }}</span></p>
       </div>
       <button class="btn btn-primary" v-if="mode == 'login'" type="submit" @click.prevent="submitLogin">Login</button>
       <button class="btn btn-primary" v-if="mode == 'register'" @click.prevent="submitRegister">Register</button>
@@ -23,6 +23,7 @@
 
 <script>
 import * as api from '@/helpers/api.js'
+import environments from '@/helpers/environments'
 import axios from 'axios'
 import qs from 'qs'
 
@@ -37,19 +38,21 @@ export default {
         password: ''
       },
       error: false,
-      errorMsg: {}
+      errorMsg: ''
     }
   },
   methods: {
     submitLogin() {
       api.login(this.credentials).then(data => {
-        console.log(api.authenticated)
-        if (api.authenticated) {
+        if (environments.authenticated()) {
+          this.error = false
           router.push({
-            path: 'dashboard'
+            name: 'dashboard'
           })
+        } else {
+          this.error = true
+          this.errorMsg = 'Unable to log in with these credentials.'
         }
-
       })
     },
     submitRegister() {

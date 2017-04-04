@@ -4,14 +4,16 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import DashboardOverview from '@/components/Dashboard_Overview'
 
+import environments from '@/helpers/environments'
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
     },
     {
       path: '/dashboard',
@@ -20,25 +22,48 @@ export default new Router({
       meta: {
         requiresAuth: true
       },
+      beforeEnter: (to, from, next) => {
+        if (environments.authenticated()) {
+          next()
+        } else {
+          next('/login')
+        }
+      },
       children: [
         {
           path: 'overview',
-          component: DashboardOverview
-        },
-        /*
-        {
-          path: 'reports',
-          component: DashboardReports
-        },
-        {
-          path: 'transactions',
-          component: DashboardTransactions
-        },
-        {
-
+          component: DashboardOverview,
+          meta: {
+            requiresAuth: true
+          }
         }
-        */
       ]
+    },
+    {
+      path: '*',
+      redirect: 'login'
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('going to: ', to)
+  if (to.meta.requiresAuth) {
+    console.log('authenticated: ', environments.authenticated())
+    if (!environments.authenticated()) {
+      next('/login')
+    } else {
+      next()
+    }
+  }
+  if (to.name === 'login') {
+    if (environments.authenticated()) {
+      next({
+        name: 'dashboard'
+      })
+    }
+  }
+  next()
+})
+
+export default router

@@ -2,6 +2,7 @@ import _ from 'lodash'
 import qs from 'qs'
 import Vue from 'vue'
 import axios from 'axios'
+import environments from '@/helpers/environments'
 
 const baseUrl = 'https://desolate-dawn-70418.herokuapp.com'
 //const baseUrl = 'http://0.0.0.0:8080'
@@ -23,8 +24,6 @@ const endpoints = {
     method: 'post, get'
   }
 }
-
-export let authenticated = false
 
 export function send(name, options = {}) {
   if (!_.has(endpoints, name)) {
@@ -76,7 +75,12 @@ export function login(credentials) {
   }).catch(error => {
     console.log('got error when logging in: ', error)
   }).then(resp => {
-    authenticated = true
-    localStorage.setItem('tmptoken', resp.data.token)
+    if (resp && resp.data.token) {
+      localStorage.setItem('tmptoken', resp.data.token)
+    }
   })
+}
+
+export function logout() {
+  localStorage.removeItem('tmptoken')
 }
