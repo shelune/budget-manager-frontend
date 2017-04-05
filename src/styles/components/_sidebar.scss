@@ -11,6 +11,30 @@
   bottom: 0;
   overflow-x: hidden;
   padding-bottom: 40px;
+  list-style: none;
+  padding-left: 0;
+
+  li {
+
+    > a {
+      color: $pal-white;
+      display: block;
+      text-decoration: none;
+      position: relative;
+      padding: 10px 15px;
+      padding-left: 20px;
+    }
+
+    &:hover {
+      background: $pal-turquoise;
+    }
+
+    &.active {
+      > a {
+        background: $pal-turquoise;
+      }
+    }
+  }
 
   @include respond-to(sm) {
     background-color: $pal-white;
