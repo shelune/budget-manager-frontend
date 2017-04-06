@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import DashboardOverview from '@/components/Dashboard_Overview'
+import DashboardTransactions from '@/components/Dashboard_Transactions'
 
 import environments from '@/helpers/environments'
 
@@ -26,23 +27,29 @@ const router = new Router({
         if (environments.authenticated()) {
           next()
         } else {
+          console.log('not authenticated, redirecting')
           next('/login')
         }
       },
       children: [
         {
-          path: 'overview',
-          component: DashboardOverview,
-          meta: {
-            requiresAuth: true
-          }
+          path: '/transactions',
+          name: 'transactions',
+          component: DashboardTransactions
+        },
+        {
+          path: '/overview',
+          name: 'overview',
+          component: DashboardOverview
         }
       ]
     },
+    /*
     {
       path: '*',
       redirect: 'login'
     }
+    */
   ]
 })
 

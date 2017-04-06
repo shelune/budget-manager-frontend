@@ -1,5 +1,7 @@
 <template lang="html">
-  <div class="container"></div>
+  <div class="container-fluid">
+    <h1 class="dashboard_title">Overview</h1>
+  </div>
 </template>
 
 <script>

@@ -3,5 +3,9 @@ $pal-dark: #222;
 $pal-turquoise: #209E92;
 $pal-lightgreen: #B9F2A1;
 
+$pal-background-light: darken($pal-white, 5%);
+
 $pal-border: #AAAAAA;
 $pal-border-dark: darken($pal-border, 20%);
+
+$sidebar-width: 225px;

@@ -8,17 +8,16 @@
             </ul>
 
             <ul class="nav navbar-nav pull-right">
-                <li><router-link :to="{name: 'dashboard'}" href="#">Dashboard</router-link></li>
+                <li><router-link :to="{name: 'dashboard'}">Dashboard</router-link></li>
                 <li><a href="#" @click.prevent="logout">Log Out</a></li>
             </ul>
         </div>
     </nav>
-    <div class="container">
+    <section id="wrapper">
         <router-view></router-view>
-    </div>
-    <hr>
-    <footer class="text-center">
-        Built with Vue.
+    </section>
+    <footer class="footer-main">
+      <div class="container text-right disclaimer">Built with Vue.</div>
     </footer>
   </div>
 </template>
