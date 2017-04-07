@@ -33,23 +33,21 @@ const router = new Router({
       },
       children: [
         {
-          path: '/transactions',
+          path: 'transactions',
           name: 'transactions',
           component: DashboardTransactions
         },
         {
-          path: '/overview',
+          path: 'overview',
           name: 'overview',
           component: DashboardOverview
         }
       ]
     },
-    /*
     {
       path: '*',
       redirect: 'login'
     }
-    */
   ]
 })
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{height: '100%'}">
     <nav class="navbar-default">
         <div class="container">
             <a href="#0" class="navbar-brand">Budget Manager</a>
@@ -8,7 +8,8 @@
             </ul>
 
             <ul class="nav navbar-nav pull-right">
-                <li><router-link :to="{name: 'dashboard'}">Dashboard</router-link></li>
+                <li><router-link :to="{name: 'transactions'}">Add</router-link></li>
+                <li><router-link :to="{name: 'overview'}">Dashboard</router-link></li>
                 <li><a href="#" @click.prevent="logout">Log Out</a></li>
             </ul>
         </div>

@@ -22,6 +22,10 @@ const endpoints = {
   expenses: {
     url: '/expenses',
     method: 'post, get'
+  },
+  expense: {
+    url: '/expenses/{expense_id}',
+    method: 'get'
   }
 }
 
@@ -57,7 +61,9 @@ export function send(name, options = {}) {
   }).catch(error => {
     console.log('got error from axios: ', error)
   }).then(resp => {
-    console.log(resp)
+    if (resp.statusText == 'OK') {
+      return resp
+    }
   })
 }
 
