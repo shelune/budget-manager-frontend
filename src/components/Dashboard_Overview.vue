@@ -38,10 +38,13 @@ export default {
   methods: {
     retrieveTransactions() {
       api.send('expenses', {
-        method: 'get'
+        method: 'get',
+        params: {
+          access_token: environments.default.userToken()
+        }
       }).then(resp => {
         console.log('expense list: ', resp.data)
-        this.expenses = resp.data
+        this.expenses = resp.data.data
       })
     },
     formatDate(date) {

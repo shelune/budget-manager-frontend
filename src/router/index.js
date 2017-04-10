@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
   if (to.name === 'login') {
     if (environments.authenticated()) {
       next({
-        name: 'dashboard'
+        name: 'overview'
       })
     }
   }

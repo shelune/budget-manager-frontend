@@ -4,8 +4,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import environments from '@/helpers/environments'
 
-const baseUrl = 'https://desolate-dawn-70418.herokuapp.com'
-//const baseUrl = 'http://0.0.0.0:8080'
+//const baseUrl = 'https://desolate-dawn-70418.herokuapp.com'
+const baseUrl = 'http://0.0.0.0:8080'
 const endpoints = {
   login: {
     url: '/auth',
@@ -37,10 +37,14 @@ export function send(name, options = {}) {
   options = _.defaults(options, {
     method: null,
     route_params: {},
-    data: {}
+    data: {},
+    params: {}
   })
 
+  // populate method
   let method = options.method
+
+  // populate url
   let url = baseUrl + endpoints[name].url
   _.each(options.route_params, (value, key) => {
     url = url.replace(`{${key}}`, value)
@@ -57,13 +61,14 @@ export function send(name, options = {}) {
   return axios({
     method: method,
     url: url,
-    data: options.data
-  }).catch(error => {
-    console.log('got error from axios: ', error)
-  }).then(resp => {
-    if (resp.statusText == 'OK') {
-      return resp
-    }
+    data: options.data,
+    params: options.params
+  }).then((resp) => {
+    let result = {success: true, data: resp}
+    return result
+  }, error => {
+    let result = {success: false, data: error}
+    return result
   })
 }
 
@@ -78,12 +83,13 @@ export function login(credentials) {
       username: credentials.email,
       password: credentials.password
     }
-  }).catch(error => {
-    console.log('got error when logging in: ', error)
   }).then(resp => {
     if (resp && resp.data.token) {
       localStorage.setItem('tmptoken', resp.data.token)
     }
+    return resp
+  }, error => {
+    return error
   })
 }
 

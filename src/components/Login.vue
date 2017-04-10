@@ -13,6 +13,9 @@
       <div class="alert alert-danger" v-if="error">
         <p><span>{{ errorMsg }}</span></p>
       </div>
+      <div class="alert alert-success" v-if="success">
+        <p><span>{{ successMsg }}</span></p>
+      </div>
       <button class="btn btn-primary" v-if="mode == 'login'" type="submit" @click.prevent="submitLogin">Login</button>
       <button class="btn btn-primary" v-if="mode == 'register'" @click.prevent="submitRegister">Register</button>
       <a href="#0" class="pull-right" @click.prevent="modeTo('login')" v-if="mode == 'register'">Login</a>
@@ -26,6 +29,7 @@ import * as api from '@/helpers/api.js'
 import environments from '@/helpers/environments'
 import axios from 'axios'
 import qs from 'qs'
+import _ from 'lodash'
 
 import router from '@/router'
 
@@ -38,16 +42,19 @@ export default {
         password: ''
       },
       error: false,
-      errorMsg: ''
+      success: false,
+      errorMsg: '',
+      successMsg: '',
     }
   },
   methods: {
     submitLogin() {
-      api.login(this.credentials).then(data => {
+      api.login(this.credentials).then(resp => {
         if (environments.authenticated()) {
           this.error = false
+          localStorage.setItem('userId', resp.data.user.id)
           router.push({
-            name: 'dashboard'
+            name: 'overview'
           })
         } else {
           this.error = true
@@ -61,6 +68,17 @@ export default {
           email: this.credentials.email,
           password: this.credentials.password,
           access_token: 'kJ1JTzp94noxqW9AYvbnvRI7ZXeqpn2q'
+        }
+      }).then(resp => {
+        console.log(resp)
+        if (resp.success) {
+          this.error = false
+          this.success = true
+          this.successMsg = _.capitalize(resp.data.statusText) + '. Please log in!'
+        } else {
+          this.success = false
+          this.error = true
+          this.errorMsg = _.capitalize(resp.data.response.data.message)
         }
       })
     },
