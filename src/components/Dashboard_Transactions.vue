@@ -30,9 +30,9 @@
             </div>
             <div class="form-group">
               <label for="expenseType" class="control-label">Expense</label>
-              <input type="radio" v-model="transaction.expenseType" value="expense" id="expenseType-expense">
+              <input type="radio" v-model="transaction.expense_type" value="expense" id="expenseType-expense">
               <label for="expenseType" class="control-label">Income</label>
-              <input type="radio" v-model="transaction.expenseType" value="income" id="expenseType-income">
+              <input type="radio" v-model="transaction.expense_type" value="income" id="expenseType-income">
             </div>
             <div class="form-group">
               <button type="reset" class="btn btn-default">Reset</button>
@@ -69,7 +69,7 @@ export default {
         category: '',
         date: '',
         comment: '',
-        expenseType: '',
+        expense_type: '',
         access_token: ''
       },
       error: {
