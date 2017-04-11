@@ -25,7 +25,7 @@ const endpoints = {
   },
   expense: {
     url: '/expenses/{expense_id}',
-    method: 'get'
+    method: 'get, put, delete'
   }
 }
 

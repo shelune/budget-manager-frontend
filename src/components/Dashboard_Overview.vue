@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="container-fluid">
+    <modal-confirm @closeModal="closeRemoveModal" :data="modalConfirmation"></modal-confirm>
     <h1 class="dashboard_title">Overview</h1>
     <table class="table table-striped table-hover ">
       <thead>
@@ -16,7 +17,7 @@
           <td>{{ capitalizeText(expense.expense_type) }}</td>
           <td>{{ formatDate(expense.date) }}</td>
           <td>{{ capitalizeText(expense.comment) }}</td>
-          <td><button class="btn btn-danger" @click.prevent="remove(expense.id)">Remove</button></td>
+          <td><button class="btn btn-danger" @click.prevent="openRemoveModal(expense.id)">Remove</button></td>
         </tr>
       </tbody>
     </table>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import ModalConfirm from '@/components/Modal_Confirm'
 import * as environments from '@/helpers/environments.js'
 import * as api from '@/helpers/api.js'
 import moment from 'moment'
@@ -33,8 +35,12 @@ export default {
   data() {
     return {
       tableHeaders: ['Amount', 'Category', 'Type', 'Date', 'Comment'],
-      expenses: []
+      expenses: [],
+      modalConfirmation: {}
     }
+  },
+  components: {
+    ModalConfirm
   },
   methods: {
     retrieveTransactions() {
@@ -54,8 +60,30 @@ export default {
     capitalizeText(text) {
       return _.capitalize(text)
     },
+    openRemoveModal(expenseId) {
+      this.modalConfirmation = {text: 'Please confirm your deletion!', expenseId: expenseId, show: true}
+    },
+    closeRemoveModal(data) {
+      this.modalConfirmation.show = false
+      if (data.confirm) {
+        this.remove(data.expenseId)
+      }
+    },
     remove(expenseId) {
       console.log('expense id: ', expenseId)
+      api.send('expense', {
+        method: 'delete',
+        data: {
+          access_token: environments.default.userToken()
+        },
+        route_params: {
+          expense_id: expenseId
+        }
+      }).then(resp => {
+        if (resp.success) {
+          this.retrieveTransactions()
+        }
+      })
     }
   },
   mounted() {
