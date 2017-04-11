@@ -8,13 +8,13 @@
         <router-link :to="{name: 'overview'}">Overview</router-link>
       </li>
       <li>
-        <a href="#">Reports</a>
+        <router-link :to="{name: 'reports'}">Reports</router-link>
       </li>
       <li>
-        <a href="#">Transactions</a>
+        <a>Transactions</a>
       </li>
       <li>
-        <a href="#">Settings</a>
+        <a>Settings</a>
       </li>
     </ul>
   </div>

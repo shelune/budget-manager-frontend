@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import DashboardOverview from '@/components/Dashboard_Overview'
 import DashboardTransactions from '@/components/Dashboard_Transactions'
+import DashboardReports from '@/components/Dashboard_Reports'
 
 import environments from '@/helpers/environments'
 
@@ -41,6 +42,11 @@ const router = new Router({
           path: 'overview',
           name: 'overview',
           component: DashboardOverview
+        },
+        {
+          path: 'reports',
+          name: 'reports',
+          component: DashboardReports
         }
       ]
     },
