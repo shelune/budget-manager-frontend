@@ -16,6 +16,7 @@
           <td>{{ capitalizeText(expense.expense_type) }}</td>
           <td>{{ formatDate(expense.date) }}</td>
           <td>{{ capitalizeText(expense.comment) }}</td>
+          <td><button class="btn btn-danger" @click.prevent="remove(expense.id)">Remove</button></td>
         </tr>
       </tbody>
     </table>
@@ -52,6 +53,9 @@ export default {
     },
     capitalizeText(text) {
       return _.capitalize(text)
+    },
+    remove(expenseId) {
+      console.log('expense id: ', expenseId)
     }
   },
   mounted() {
