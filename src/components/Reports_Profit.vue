@@ -20,20 +20,35 @@ import VueCharts from 'vue-chartjs'
 export default {
   data() {
     return {
-
+      labels: [],
+      profitsData: []
+    }
+  },
+  props: ['data'],
+  watch: {
+    data() {
+      this.renderData()
+      this.renderProfitChart()
     }
   },
   methods: {
-    renderProfitChart(options) {
+    renderData() {
+      _.map(this.data, month => {
+        this.labels.push(month.stamp)
+        this.profitsData.push(month.value)
+      })
+    },
+    renderProfitChart() {
+      console.log('labels:', this.labels)
+      console.log('profits: ', this.profitsData)
       const ctxProfit = document.getElementById("chart-profit")
-
       const profitChart = new Chart(ctxProfit, {
         type: 'bar',
         data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          labels: this.labels,
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Profit / Loss',
+            data: this.profitsData,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

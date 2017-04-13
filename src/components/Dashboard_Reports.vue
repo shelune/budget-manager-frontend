@@ -1,13 +1,14 @@
 <template lang="html">
   <div class="container-fluid">
     <h1 class="dashboard_title">Reports</h1>
-    <reports-profit></reports-profit>
+    <reports-profit :data="profitChartData"></reports-profit>
   </div>
 </template>
 
 <script>
 import * as environments from '@/helpers/environments.js'
 import * as api from '@/helpers/api.js'
+import * as processor from '@/helpers/processor.js'
 import _ from 'lodash'
 import moment from 'moment'
 import ReportsProfit from '@/components/Reports_Profit'
@@ -30,7 +31,8 @@ const monthNames = [
 export default {
   data() {
     return {
-      expenses: []
+      expenses: [],
+      profitChartData: []
     }
   },
   components: {
@@ -50,20 +52,13 @@ export default {
         let expenseList = this.expenses
 
         // handle data for monthly profit chart
-        let monthLabels = []
-        _.each(expenseList, expense => {
-          expense.date = moment(expense.date).format('LL')
-          let month = expense.date.match(/[\w\-]+/g)[0]
-          if (_.indexOf(monthLabels, month) === -1) {
-            monthLabels.push(month)
-          }
-        })
+        let monthLabels = processor.getMonthLabels(expenseList)
 
-        monthLabels = monthLabels.sort((a, b) => {
-          return monthNames.indexOf(a) > monthNames.indexOf(b)
-        })
+          // handle profit / loss for each month
+        let monthProfits = processor.getMonthlyProfits(expenseList, monthLabels)
+        this.profitChartData = monthProfits
 
-        console.log('month list: ', monthLabels)
+        console.log('profit by month:', monthProfits)
       })
     }
   },
