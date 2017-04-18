@@ -26,6 +26,10 @@ const endpoints = {
   expense: {
     url: '/expenses/{expense_id}',
     method: 'get, put, delete'
+  },
+  categories: {
+    url: '/expenses/categories',
+    method: 'get'
   }
 }
 

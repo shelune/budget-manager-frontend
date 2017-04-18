@@ -14,7 +14,7 @@
         <a>Transactions</a>
       </li>
       <li>
-        <a>Settings</a>
+        <a>Test</a>
       </li>
     </ul>
   </div>

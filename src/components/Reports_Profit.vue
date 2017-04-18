@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="panel panel-primary">
+  <div class="panel panel-primary col-sm-6">
     <div class="panel-heading">
       <h3 class="panel-title">Profit Trend Chart</h3>
     </div>
