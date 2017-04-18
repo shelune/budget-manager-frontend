@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="panel panel-primary col-sm-6">
+  <div class="panel panel-primary panel-chart">
     <div class="panel-heading">
       <h3 class="panel-title">Expenses By Categories</h3>
     </div>
@@ -34,9 +34,9 @@ export default {
   },
   methods: {
     renderData() {
-      _.forOwn(this.data, (value, key) => {
-        this.labels.push(key)
-        this.values.push(value)
+      _.map(this.data, (category) => {
+        this.labels.push(category.name)
+        this.values.push(category.total)
       })
     },
     renderCategoryChart() {
@@ -51,18 +51,17 @@ export default {
             backgroundColor: [
                 "#FF6384",
                 "#36A2EB",
-                "#FFCE56"
-            ],
-            hoverBackgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
+                "#FFCE56",
+                '#eea247',
+                '#e57264',
+                '#aeb698',
+                '#955751',
+                '#e9e6c7',
+                '#1f817f'
             ]
           }]
         }
       });
-
-      console.log('pie data:', this.pieData)
     }
   },
   mounted() {
