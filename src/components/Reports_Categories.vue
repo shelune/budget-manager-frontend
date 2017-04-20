@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="panel panel-primary panel-chart">
     <div class="panel-heading">
-      <h3 class="panel-title">Expenses By Categories</h3>
+      <h3 class="panel-title">{{ this.type }} By Categories</h3>
     </div>
     <div class="panel-body">
       <div class="chart-categories">
-        <canvas id="chart-categories" width="400" height="400"></canvas>
+        <canvas :id="categoryId" width="400" height="400"></canvas>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
       pieData: [],
     }
   },
-  props: ['data'],
+  props: ['data', 'categoryId', 'type'],
   watch: {
     data() {
       this.renderData()
@@ -40,9 +40,9 @@ export default {
       })
     },
     renderCategoryChart() {
-      const ctxProfit = document.getElementById("chart-categories")
+      const ctxCategories = document.getElementById(this.categoryId)
 
-      const profitChart = new Chart(ctxProfit, {
+      const categoriesChart = new Chart(ctxCategories, {
         type: 'doughnut',
         data: {
           labels: this.labels,

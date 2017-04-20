@@ -51,7 +51,7 @@ export default {
         }
       }).then(resp => {
         console.log('expense list: ', resp.data)
-        this.expenses = resp.data.data
+        this.expenses = _.reverse(resp.data.data)
       })
     },
     formatDate(date) {

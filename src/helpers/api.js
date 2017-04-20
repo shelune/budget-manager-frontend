@@ -28,7 +28,7 @@ const endpoints = {
     method: 'get, put, delete'
   },
   categories: {
-    url: '/expenses/categories',
+    url: '/expenses/categories{mode}',
     method: 'get'
   }
 }

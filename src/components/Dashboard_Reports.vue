@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <h1 class="dashboard_title">Reports</h1>
     <reports-profit :data="profitChartData"></reports-profit>
-    <reports-categories :data="categoriesChartData"></reports-categories>
+    <reports-categories type="Expenses" category-id="expense-categories" :data="categoriesExpense"></reports-categories>
+    <reports-categories type="Incomes" category-id="income-categories" :data="categoriesIncome"></reports-categories>
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
     return {
       expenses: [],
       profitChartData: [],
-      categoriesChartData: {}
+      categoriesExpense: {},
+      categoriesIncome: {}
     }
   },
   components: {
@@ -65,21 +67,29 @@ export default {
         console.log('profit by month:', monthProfits)
       })
     },
-    retrieveCategories() {
+    retrieveCategories(mode) {
       api.send('categories', {
+        route_params: {
+          mode: _.capitalize(mode)
+        },
         params: {
           access_token: environments.default.userToken()
         }
       })
       .then(resp => {
         console.log('show categories: ', resp)
-        this.categoriesChartData = resp.data.data
+        if (mode === 'expense') {
+          this.categoriesExpense = resp.data.data
+        } else if (mode === 'income') {
+          this.categoriesIncome = resp.data.data
+        }
       })
     }
   },
   mounted() {
     this.retrieveTransactions()
-    this.retrieveCategories()
+    this.retrieveCategories('expense')
+    this.retrieveCategories('income')
   }
 }
 </script>
