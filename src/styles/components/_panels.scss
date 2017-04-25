@@ -1,4 +1,9 @@
-.panel-chart {
+.panelChart {
   width: 48%;
   display: inline-block;
+
+  &-full {
+    display: block;
+    width: 100%;
+  }
 }

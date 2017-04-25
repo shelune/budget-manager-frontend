@@ -23,12 +23,12 @@ export default {
   props: ['data'],
   methods: {
     cancel() {
-      this.$emit('closeModal', {confirm: false, expenseId: this.data.expenseId})
+      this.$emit('closeModal', {confirm: false, expenseId: this.data.expenseId || ''})
     },
     confirm() {
       this.$emit('closeModal', {
         confirm: true,
-        expenseId: this.data.expenseId
+        expenseId: this.data.expenseId || ''
       })
     }
   }

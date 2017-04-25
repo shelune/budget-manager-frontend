@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="panel panel-primary panel-chart">
+  <div class="panel panel-primary panelChart">
     <div class="panel-heading">
       <h3 class="panel-title">{{ this.type }} By Categories</h3>
     </div>

@@ -1,5 +1,6 @@
 <template>
   <div id="app" :style="{height: '100%'}">
+    <modal-confirm @closeModal="closeModal" :data="modalConfirmation"></modal-confirm>
     <nav class="navbar-default">
         <div class="container">
             <a href="#0" class="navbar-brand">Budget Manager</a>
@@ -10,7 +11,7 @@
             <ul class="nav navbar-nav pull-right">
                 <li><router-link :to="{name: 'transactions'}">Add</router-link></li>
                 <li><router-link :to="{name: 'overview'}">Dashboard</router-link></li>
-                <li><a href="#" @click.prevent="logout">Log Out</a></li>
+                <li><a href="#" @click.prevent="openModal">Log Out</a></li>
             </ul>
         </div>
     </nav>
@@ -25,16 +26,34 @@
 
 <script>
 import * as api from '@/helpers/api.js'
+import ModalConfirm from '@/components/Modal_Confirm'
 import router from './router'
 
 export default {
   name: 'app',
+  data () {
+    return {
+      modalConfirmation: {}
+    }
+  },
+  components: {
+    ModalConfirm
+  },
   methods: {
     logout() {
       api.logout()
       router.push({
         name: 'login'
       })
+    },
+    openModal() {
+      this.modalConfirmation = {text: 'Please confirm your exit!', show: true}
+    },
+    closeModal(data) {
+      this.modalConfirmation.show = false
+      if (data.confirm) {
+        this.logout()
+      }
     }
   }
 }

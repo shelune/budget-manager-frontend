@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="container-fluid">
     <h1 class="dashboard_title">Reports</h1>
-    <reports-profit :data="profitChartData"></reports-profit>
     <reports-categories type="Expenses" category-id="expense-categories" :data="categoriesExpense"></reports-categories>
     <reports-categories type="Incomes" category-id="income-categories" :data="categoriesIncome"></reports-categories>
+    <reports-profit :data="profitChartData"></reports-profit>
   </div>
 </template>
 
