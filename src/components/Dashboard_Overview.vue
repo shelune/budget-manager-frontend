@@ -40,8 +40,9 @@
 
 <script>
 import ModalConfirm from '@/components/Modal_Confirm'
-import * as environments from '@/helpers/environments.js'
+import * as environments from '@/helpers/environments'
 import * as api from '@/helpers/api.js'
+import * as processor from '@/helpers/processor'
 import moment from 'moment'
 import _ from 'lodash'
 
@@ -69,35 +70,13 @@ export default {
         this.expenses = _.reverse(resp.data.data)
         console.log('expense list: ', this.expenses)
         this.getTotalIncome(this.expenses)
-        this.getThisMonth(this.expenses)
+        processor.getThisMonth(this.thisMonth, this.expenses)
       })
     },
     getTotalIncome(expenses) {
       this.totalIncome = _.reduce(expenses, (sum, next) => {
         return next.expense_type === 'expense' ? sum + next.amount : sum - next.amount
       }, 0)
-    },
-    getThisMonth(expenseList) {
-      const today = moment().toDate()
-      console.log('today:', today)
-
-      let incomes = _.filter(expenseList, (expense) => {
-        return expense.expense_type === 'income'
-      })
-
-      let expenses = _.filter(expenseList, (expense) => {
-        return expense.expense_type === 'expense'
-      })
-
-      this.thisMonth.income = _.reduce(incomes, (sum, next) => {
-        return moment(next.date).isSame(today, 'month') ? sum + next.amount : sum + 0
-      }, 0)
-
-      this.thisMonth.expense = _.reduce(expenses, (sum, next) => {
-        return moment(next.date).isSame(today, 'month') ? sum + next.amount : sum + 0
-      }, 0)
-
-      console.log('this month expense:', this.thisMonth.expense)
     },
     formatDate(date) {
       return moment(date).format('LL')

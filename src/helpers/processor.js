@@ -44,3 +44,23 @@ export function getMonthlyProfits (expenses, months) {
 
   return monthProfits
 }
+
+export function getThisMonth (destination, source) {
+  const today = moment().toDate()
+
+  let incomes = _.filter(source, (expense) => {
+    return expense.expense_type === 'income'
+  })
+
+  let expenses = _.filter(source, (expense) => {
+    return expense.expense_type === 'expense'
+  })
+
+  destination.income = _.reduce(incomes, (sum, next) => {
+    return moment(next.date).isSame(today, 'month') ? sum + next.amount : sum + 0
+  }, 0)
+
+  destination.expense = _.reduce(expenses, (sum, next) => {
+    return moment(next.date).isSame(today, 'month') ? sum + next.amount : sum + 0
+  }, 0)
+}
