@@ -3,17 +3,17 @@
     <modal-confirm @closeModal="closeRemoveModal" :data="modalConfirmation"></modal-confirm>
     <h1 class="dashboard_title">Overview</h1>
     <div class="row overview_general">
-      <div class="col-sm-4">
+      <div class="col-sm-4 overview_total">
         <h2>Total income</h2>
-        <p>{{ this.totalIncome }}</p>
+        <p class="text-info">{{ this.totalIncome > 0 ? '+' : '' }}{{ this.totalIncome }}</p>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 overview_monthlyIncome">
         <h2>This month's income</h2>
-        <p>+{{ this.thisMonth.income }}</p>
+        <p class="text-success">+{{ this.thisMonth.income }}</p>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 overview_monthlyExpense">
         <h2>This month's expense</h2>
-        <p>-{{ this.thisMonth.expense }}</p>
+        <p class="text-danger">-{{ this.thisMonth.expense }}</p>
       </div>
     </div>
     <table class="table table-striped table-hover">
@@ -75,7 +75,7 @@ export default {
     },
     getTotalIncome(expenses) {
       this.totalIncome = _.reduce(expenses, (sum, next) => {
-        return next.expense_type === 'expense' ? sum + next.amount : sum - next.amount
+        return next.expense_type === 'expense' ? sum - next.amount : sum + next.amount
       }, 0)
     },
     formatDate(date) {

@@ -5,5 +5,9 @@
         font-size: 20px;
       }
     }
+
+    &_total, &_monthlyIncome, &_monthlyExpense {
+      font-size: 24px;
+    }
   }
 }
