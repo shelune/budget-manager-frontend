@@ -11,4 +11,9 @@
   &:first-child {
     float: left;
   }
+
+  @include respond-to(sm) {
+    width: 100%;
+    float: none;
+  }
 }
