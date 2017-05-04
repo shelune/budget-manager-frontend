@@ -4,7 +4,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import environments from '@/helpers/environments'
 
-const baseUrl = 'https://desolate-dawn-70418.herokuapp.com'
+const baseUrl = 'https://budget-manager-backend-v3.herokuapp.com/'
 // const baseUrl = 'http://0.0.0.0:8080'
 const endpoints = {
   login: {
