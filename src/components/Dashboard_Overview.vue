@@ -16,7 +16,7 @@
         <p class="text-danger">-{{ this.thisMonth.expense }}</p>
       </div>
     </div>
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover table-responsive">
       <thead>
         <tr>
           <th>#</th>
@@ -49,7 +49,7 @@ import _ from 'lodash'
 export default {
   data() {
     return {
-      tableHeaders: ['Amount', 'Category', 'Type', 'Date', 'Comment'],
+      tableHeaders: ['Amount', 'Category', 'Type', 'Date', 'Comment', 'Remove'],
       expenses: [],
       modalConfirmation: {},
       totalIncome: 0,

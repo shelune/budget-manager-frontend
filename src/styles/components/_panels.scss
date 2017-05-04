@@ -1,9 +1,14 @@
 .panelChart {
-  width: 48%;
+  width: 49%;
   display: inline-block;
+  float: right;
 
   &-full {
     display: block;
     width: 100%;
+  }
+
+  &:first-child {
+    float: left;
   }
 }

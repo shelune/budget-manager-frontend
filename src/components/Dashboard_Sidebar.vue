@@ -10,12 +10,6 @@
       <li>
         <router-link :to="{name: 'reports'}">Reports</router-link>
       </li>
-      <li>
-        <a>Test</a>
-      </li>
-      <li>
-        <a>Test</a>
-      </li>
     </ul>
   </div>
 </template>

@@ -1,11 +1,10 @@
 <template lang="html">
   <div class="container-fluid board-transactions">
-    <h1 class="dashboard_title">Transactions</h1>
+    <h1 class="dashboard_title">Add Transactions</h1>
     <div class="row">
       <div class="col-sm-12">
         <form class="form-horizontal">
           <fieldset>
-            <legend>Add new transaction</legend>
             <div class="form-group">
               <label for="amount" class="control-label">Amount</label>
               <div class="">
